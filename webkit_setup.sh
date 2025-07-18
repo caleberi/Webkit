@@ -52,7 +52,7 @@ check_exit_status
 wkdev-enter 2>&1
 check_exit_status
 
-cd /host/home/$USER/WebKit || {echo "Error: Failed to change to WebKit directory.";exit 1}
+cd /host/home/$USER/WebKit || { echo "Error: Failed to change to WebKit directory.";exit 1}
 Tools/Scripts/build-webkit --gtk --release 2>&1
 check_exit_status
 
