@@ -1,4 +1,4 @@
-#!/opt/homebrew/bin/bash
+#!/bin/bash
 
 
 git_executable=$(which git)
@@ -16,7 +16,7 @@ check_exit_status() {
 # Check if git is installed and webkit-container-sdk directory doesn't exist
 if [ -x "${git_executable}" ] && [ ! -d "webkit-container-sdk" ]; then
     # Configure git buffer size
-    "${git_executable}" config --global http.postBuffer 10737418240
+    "${git_executable}" config --global http.postBuffer 2737418240
     check_exit_status
 
     # Clone repositories
@@ -35,10 +35,17 @@ else
     fi
 fi
 
+
+if ! command -v podman &> /dev/null; then sudo apt-get -y install podman; fi
+if ! command -v lsmod &> /dev/null; then  sudo apt-get update &&  sudo apt-get install kmod;  fi
+
 cd webkit-container-sdk || {
     echo "Error: Failed to change to webkit-container-sdk directory."
     exit 1
 }
+
+
+
 
 # Source the SDK registration script
 source ./register-sdk-on-host.sh 2>&1
